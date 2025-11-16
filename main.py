@@ -7,6 +7,8 @@ from UIComponents.tabs import left_tabs
 from UIComponents.MaterialProperties import material_properties
 from UIComponents.MaterialProperties2 import metal_site_defects
 from UIComponents.MaterialProperties3 import chalcogen_site_defects
+from UIComponents.SettingsGeneration import generation_settings
+
 
 
 
@@ -18,6 +20,7 @@ app.layout = html.Div([
     navbar,
     html.Div(
         [
+            # Left side - Tabs and parameter panels
             html.Div(
                 [
                     left_tabs(),
@@ -26,11 +29,15 @@ app.layout = html.Div([
                     chalcogen_site_defects(),
                 ],
                 className="tab-with-panel"
-            )
+            ),
+            # Right side - Generation settings and config
+            generation_settings()
         ],
         className="section-container"
     )
 ])
+
+
 
 
 
