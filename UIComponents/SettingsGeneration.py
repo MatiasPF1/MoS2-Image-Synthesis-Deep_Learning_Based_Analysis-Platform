@@ -37,7 +37,7 @@ def generation_settings():
                     html.Button(
                         [
                             html.I(className="fas fa-play", style={"marginRight": "10px"}),
-                            "Generate Images"
+                            "Input the Parameters"
                         ],
                         id="generate-btn",
                         className="generate-btn"
