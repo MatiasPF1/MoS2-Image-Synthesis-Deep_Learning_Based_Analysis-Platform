@@ -20,6 +20,7 @@ def Microscope_Settings():
                         [
                             html.Label("Voltage(kV)"),
                             dcc.Input(
+                                id="Voltage",
                                 type="text",
                                 value=300,
                                 className="input-field"
@@ -27,6 +28,7 @@ def Microscope_Settings():
 
                             html.Label("Aperture"),
                             dcc.Input(
+                                id="Aperture",
                                 type="number",
                                 value=75,
                                 className="input-field"
@@ -40,6 +42,7 @@ def Microscope_Settings():
                         [
                             html.Label("Defocus(df)"),
                             dcc.Input(
+                                id="Defocus",
                                 type="number",
                                 value=25,
                                 className="input-field"
@@ -47,6 +50,7 @@ def Microscope_Settings():
 
                             html.Label("Dwell Time"),
                             dcc.Input(
+                                id="Dwell_Time",
                                 type="number",
                                 value=1,
                                 className="input-field"
@@ -54,6 +58,7 @@ def Microscope_Settings():
 
                             html.Label("Chalcogen Site Atom Number"),
                             dcc.Input(
+                                id="Chalcogen_Site_Atom_Number",
                                 type="number",
                                 value=16,
                                 className="input-field"
