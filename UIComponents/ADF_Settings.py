@@ -16,6 +16,7 @@ def ADF_Settings():
                         [
                             html.Label("ADF Angle Min"),
                             dcc.Input(
+                                id="ADF_Angle_Min",
                                 type="number",
                                 value=0,
                                 className="input-field"
@@ -23,6 +24,7 @@ def ADF_Settings():
 
                             html.Label("ADF Angle Max"),
                             dcc.Input(
+                                id="ADF_Angle_Max",
                                 type="number",
                                 value=0,
                                 className="input-field"
