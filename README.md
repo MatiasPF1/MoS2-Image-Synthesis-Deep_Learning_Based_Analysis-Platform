@@ -1,5 +1,8 @@
-# Version 1
+# Version 2
 - Work For The Advanced Quantumn Materials Lab
-<img width="1915" height="871" alt="image" src="https://github.com/user-attachments/assets/cd88bdd1-68d3-4998-80f4-afd8f71cc15e" />
-<img width="1910" height="862" alt="image" src="https://github.com/user-attachments/assets/4a12cf29-3b46-4ca2-bc05-3abe99798937" />
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/d42c3e92-1265-44ca-90f8-2b43befdfeae" />
+<br>
+<br>
+<img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/5c8577eb-0e4a-4945-855b-86f65e9b11f3" />
+
 
