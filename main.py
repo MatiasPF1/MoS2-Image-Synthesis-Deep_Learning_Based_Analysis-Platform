@@ -5,6 +5,7 @@ import dash
 
 #First Tab Components
 from UIComponents.Navbar import navbar
+from UIComponents.Sidebar import sidebar
 from UIComponents.tabs import left_tabs
 from UIComponents.MaterialProperties import material_properties
 from UIComponents.MaterialProperties2 import metal_site_defects
@@ -25,33 +26,42 @@ from Generation_Stem import Generation
 
 
 # 0-Main UI Layout
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"])
 
 app.layout = html.Div([
     navbar,
     
     html.Div(
         [
-            # Left side - Tabs and parameter panels
+            # Sidebar on the left
+            sidebar,
+            
+            # Main content area
             html.Div(
                 [
-                    left_tabs(),
+                    # Left side - Tabs and parameter panels
+                    html.Div(
+                        [
+                            left_tabs(),
 
-                    #Material Section Panels 
-                    material_properties(),
-                    metal_site_defects(),
-                    chalcogen_site_defects(),
+                            #Material Section Panels 
+                            material_properties(),
+                            metal_site_defects(),
+                            chalcogen_site_defects(),
 
-                    #Microscope Section Panels
-                    Microscope_Settings(),
-                    Abberation_Coeficients(),
-                    ADF_Settings(),
-                    Gaussian_Parameters(),
+                            #Microscope Section Panels
+                            Microscope_Settings(),
+                            Abberation_Coeficients(),
+                            ADF_Settings(),
+                            Gaussian_Parameters(),
+                        ],
+                        className="tab-with-panel"
+                    ),
+                    # Right side - Generation settings and config
+                    generation_settings()
                 ],
-                className="tab-with-panel"
-            ),
-            # Right side - Generation settings and config
-            generation_settings()
+                className="main-content"
+            )
         ],
         className="section-container"
     )
