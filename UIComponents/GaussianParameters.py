@@ -6,8 +6,8 @@ Second Part, Part 4
 def Gaussian_Parameters():
     return html.Div(
         [
-            html.H4("Metal Site Defects", className="section-title"),
-            html.P("Configure substitutions and vacancies on metal sites: Defects accept from 0 to 1.0 concentrations", className="section-subtitle"),
+            html.H4("Gaussian Parameters", className="section-title"),
+            html.P("Configure Gaussian parameters for STEM image generation(plis do not input 3e-....., explicitly input the decimals)", className="section-subtitle"),
 
             html.Div(
                 [

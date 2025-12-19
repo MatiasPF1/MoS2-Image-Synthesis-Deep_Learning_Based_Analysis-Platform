@@ -11,7 +11,7 @@ def Microscope_Settings():
     return html.Div(
         [
             html.H4("Basic Microscope Settings", className="section-title"),
-            html.P("Configure electron microscope operational parameters", className="section-subtitle"),
+            html.P("Configure electron microscope operational parameters(dwell time is in microseconds at int inputs by default)", className="section-subtitle"),
 
             html.Div(
                 [

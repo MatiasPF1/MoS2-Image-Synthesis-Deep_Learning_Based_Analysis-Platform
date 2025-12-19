@@ -1,4 +1,4 @@
-''''                                                Imports                                                            '''
+''''                                                Imports Of UI Components                                                          '''
 ##########################################################################################################################
 # Essential/Base Imports 
 ##########################################################################################################################
@@ -26,6 +26,15 @@ from UIComponents.GaussianParameters import Gaussian_Parameters
 from UIComponents.DisplayValues import register_display_values_callback
 # Import Generation module to update variables
 from Generation_Stem import Generation
+
+##########################################################################################################################
+# Imports for STEM-Generation page 
+##########################################################################################################################
+import importlib
+FileInputPanel = importlib.import_module("UIComponents-2.FileInputPanel")
+file_input_panel = FileInputPanel.file_input_panel
+FileInputCallbacks = importlib.import_module("UIComponents-2.FileInputCallbacks")
+register_file_upload_callbacks = FileInputCallbacks.register_file_upload_callbacks
 
 
 
@@ -66,17 +75,7 @@ def xyz_generation_page():
 """Content for Pre-Processing page"""
 def pre_processing_page():
     return html.Div(
-        [
-            html.Div(
-                [
-                    html.I(className="fas fa-wrench", style={"fontSize": "48px", "color": "var(--accent)", "marginBottom": "20px"}),
-                    html.H2("Pre-Processing", style={"color": "var(--text-primary)", "marginBottom": "12px"}),
-                    html.P("Pre-processing tools and utilities will be available here.", 
-                           style={"color": "var(--text-secondary)", "fontSize": "15px"})
-                ],
-                className="page-placeholder"
-            )
-        ],
+        [],
         className="main-content"
     )
 
@@ -86,12 +85,9 @@ def stem_generation_page():
         [
             html.Div(
                 [
-                    html.I(className="fas fa-image", style={"fontSize": "48px", "color": "var(--accent)", "marginBottom": "20px"}),
-                    html.H2("STEM Generation", style={"color": "var(--text-primary)", "marginBottom": "12px"}),
-                    html.P("STEM image generation tools will be available here.", 
-                           style={"color": "var(--text-secondary)", "fontSize": "15px"})
+                    file_input_panel()
                 ],
-                className="page-placeholder"
+                className="tab-with-panel"
             )
         ],
         className="main-content"
@@ -100,17 +96,7 @@ def stem_generation_page():
 """Content for ResUnet page"""
 def resunet_page():
     return html.Div(
-        [
-            html.Div(
-                [
-                    html.I(className="fas fa-gear", style={"fontSize": "48px", "color": "var(--accent)", "marginBottom": "20px"}),
-                    html.H2("ResUnet For Vacancies and Polymorphs", style={"color": "var(--text-primary)", "marginBottom": "12px"}),
-                    html.P("ResUnet analysis tools will be available here.", 
-                           style={"color": "var(--text-secondary)", "fontSize": "15px"})
-                ],
-                className="page-placeholder"
-            )
-        ],
+        [],
         className="main-content"
     )
 
@@ -119,7 +105,7 @@ def resunet_page():
 #                                          1- Main Layout
 ##########################################################################################################################
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"], suppress_callback_exceptions=True)
 app.layout = html.Div([
     dcc.Store(id='current-page', data='xyz-generation'),     # Store for current page
     navbar,
@@ -136,7 +122,7 @@ app.layout = html.Div([
 
 
 ##########################################################################################################################
-#                                         2- Interactivity(1st) -- Sidebar Page Selection
+#                             2- Main Section Interactivity(1st) -- Sidebar Page Selection
 ##########################################################################################################################
 # Sidebar Navigation Callback
 @app.callback(
@@ -145,6 +131,7 @@ app.layout = html.Div([
     Output("nav-pre-processing", "className"),
     Output("nav-stem-generation", "className"),
     Output("nav-resunet", "className"),
+    
     Input("nav-xyz-generation", "n_clicks"),
     Input("nav-pre-processing", "n_clicks"),
     Input("nav-stem-generation", "n_clicks"),
@@ -183,7 +170,7 @@ def navigate_pages(xyz_clicks, pre_clicks, stem_clicks, resunet_clicks):
     )
 
 ##########################################################################################################################
-#                        2- Interactivity(2nd) -- XYZ Page Interactivity(default): toggle_buttons
+#                        2- Main Section Interactivity(2nd) -- XYZ Page Interactivity(default): toggle_buttons
 ##########################################################################################################################
 
 
@@ -261,7 +248,7 @@ def toggle_buttons(material_clicks, microscope_clicks):
         )
 
 ##########################################################################################################################
-#                               2-  Interactivity(3rd) -- Send inputs to the Generation Module
+#                               2-  Main Section Interactivity(3rd) -- Send inputs to the Generation Module
 ##########################################################################################################################
 
 
@@ -368,7 +355,13 @@ def store_parameters_RunGeneration(n_clicks, batch_size, mat_name, pixel_size, m
     # Run the generation process with batch_size
     Generation.run_generation(int(batch_size))
     return n_clicks
+
+
 # Register display values callback
 register_display_values_callback(app)
+
+# Register file upload callbacks for STEM Generation page
+register_file_upload_callbacks(app)
+
 if __name__ == "__main__":
     app.run(debug=True)

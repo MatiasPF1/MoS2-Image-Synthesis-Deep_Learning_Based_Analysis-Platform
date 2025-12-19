@@ -426,3 +426,44 @@ label {
     font-weight: 600;
     font-family: 'Consolas', monospace;
 }
+
+
+/*  FILE INPUT PANEL - Upload components for STEM Generation page  */
+.file-inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.file-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.file-upload-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    background: var(--bg-input);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: 0.2s ease;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.file-upload-box:hover {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    color: var(--text-primary);
+}
+
+.file-name-display {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    min-height: 20px;
+}

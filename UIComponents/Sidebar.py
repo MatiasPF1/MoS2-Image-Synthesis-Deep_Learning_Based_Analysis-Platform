@@ -28,18 +28,18 @@ sidebar = html.Div(
                 ),
                 html.Div(
                     [
-                        html.I(className="fas fa-wrench sidebar-item-icon"),
-                        html.Span("Pre-Proccesing", className="sidebar-item-text")
-                    ],
-                    id="nav-pre-processing",
-                    className="sidebar-item"
-                ),
-                html.Div(
-                    [
                         html.I(className="fas fa-image sidebar-item-icon"),
                         html.Span("STEM-Generation", className="sidebar-item-text")
                     ],
                     id="nav-stem-generation",
+                    className="sidebar-item"
+                ),
+                html.Div(
+                    [
+                        html.I(className="fas fa-wrench sidebar-item-icon"),
+                        html.Span("Pre-Proccesing", className="sidebar-item-text")
+                    ],
+                    id="nav-pre-processing",
                     className="sidebar-item"
                 ),
                 html.Div(
