@@ -23,12 +23,12 @@ def file_input_panel():
                                     html.I(className="fas fa-cloud-upload-alt", style={"marginRight": "8px"}),
                                     "Drag & Drop or Click to Select"
                                 ]),
-                                className="file-upload-box",
-                                multiple=False
+                                className="file-upload-box", # CSS class for styling
+                                multiple=False # Single file upload
                             ),
                             html.Div(id="xyz-file-name", className="file-name-display")
                         ],
-                        className="file-input-group"
+                        className="file-input-group" 
                     ),
 
                     # Params File Input
@@ -41,8 +41,8 @@ def file_input_panel():
                                     html.I(className="fas fa-cloud-upload-alt", style={"marginRight": "8px"}),
                                     "Drag & Drop or Click to Select"
                                 ]),
-                                className="file-upload-box",
-                                multiple=False
+                                className="file-upload-box", # CSS class for styling
+                                multiple=False # Single file upload
                             ),
                             html.Div(id="params-file-name", className="file-name-display")
                         ],
@@ -60,14 +60,30 @@ def file_input_panel():
                                     html.I(className="fas fa-cloud-upload-alt", style={"marginRight": "8px"}),
                                     "Drag & Drop or Click to Select"
                                 ]),
-                                className="file-upload-box",
-                                multiple=False
+                                className="file-upload-box", # CSS class for styling
+                                multiple=False # Single file upload
                             ),
                             html.Div(id="batch-file-name", className="file-name-display")
                         ],
                         className="file-input-group"
                     ),
                     
+                    # Generate STEM Button
+                    html.Div(
+                        [
+                            html.Button(
+                                [
+                                    html.I(className="fas fa-play", style={"marginRight": "8px"}),
+                                    "Generate STEM Images"
+                                ],
+                                id="generate-stem-btn",
+                                className="generate-btn",
+                                n_clicks=0
+                            )
+                        ],
+                        className="button-container",
+                        style={"marginTop": "5px"}
+                    ),
                     
                 ],
                 className="file-inputs-container"
