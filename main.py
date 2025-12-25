@@ -1,4 +1,6 @@
 ''''                                                Imports Of UI Components                                                          '''
+
+
 ##########################################################################################################################
 # Essential/Base Imports 
 ##########################################################################################################################
@@ -7,7 +9,7 @@ import dash_bootstrap_components as dbc
 import dash
 
 ##########################################################################################################################
-# Imports for XYZ/Params Generation page 
+#1-Imports for XYZ/Params Generation page and All the Main UI Components
 ##########################################################################################################################
 #First Tab Components
 from UIComponents_MainUI.Navbar import navbar
@@ -26,24 +28,17 @@ from UIComponents_MainUI.GaussianParameters import Gaussian_Parameters
 from UIComponents_MainUI.DisplayValues import register_display_values_callback
 
 ##########################################################################################################################
-# Imports for STEM-Generation page 
+#2-)Imports for STEM-Generation page 
 ##########################################################################################################################
-import importlib
-#  import the Generation module from 1-)XYZ_Params_Generation directory
-Generation = importlib.import_module("1-)XYZ_Params_Generation.Generation")
-#  import the FileInputPanel module from UIComponents-StemGeneration directory
-FileInputPanel = importlib.import_module("UIComponents_StemGeneration.FileInputPanel") 
-# Extract the file_input_panel function/component from the imported module
-file_input_panel = FileInputPanel.file_input_panel
-#  import the FileInputCallbacks module from UIComponents-StemGeneration directory
-FileInputCallbacks = importlib.import_module("UIComponents_StemGeneration.FileInputCallbacks")
-# Extract the register_file_upload_callbacks function from the imported module
-register_file_upload_callbacks = FileInputCallbacks.register_file_upload_callbacks
-# In resume: we import the file input panel UI component and its associated callbacks so we can use them in the STEM-Generation section.
+from _1_xyz_params_generation import Generation
+from UIComponents_StemGeneration.FileInputPanel import file_input_panel
+from UIComponents_StemGeneration.FileInputCallbacks import register_file_upload_callbacks
 
 
 
 ''''                                                Main UI Work                                                            '''
+
+
 ##########################################################################################################################
 #                                          0- ALL Modules/Options For The WebApp
 ##########################################################################################################################
