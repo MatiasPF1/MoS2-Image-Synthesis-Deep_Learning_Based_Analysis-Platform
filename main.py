@@ -354,8 +354,17 @@ def store_parameters_RunGeneration(n_clicks, batch_size, mat_name, pixel_size, m
     Generation.probe_current_param_mean = float(probe_cur_mean)
     Generation.probe_current_param_std = float(probe_cur_std)
     Generation.dwell_time = float(dwell_time)
+    
     # Run the generation process with batch_size
-    Generation.run_generation(int(batch_size))
+    print(f"Starting generation with batch_size: {batch_size}")
+    try:
+        result = Generation.run_generation(int(batch_size))
+        print(f"Generation completed. Output folder: {result}")
+    except Exception as e:
+        print(f"Error during generation: {e}")
+        import traceback
+        traceback.print_exc()
+    
     return n_clicks
 
 

@@ -54,6 +54,9 @@ def run_generation(file_num):
     Args:
         file_num (int): Number of files to generate
     """
+    print(f"run_generation called with file_num: {file_num}")
+    print(f"Parameters: file_name={file_name}, pixel_size={pixel_size}, image_size={image_size}")
+    
      # Update dictionaries with current variable values
     sample_param_dic['file_name'] = file_name
     sample_param_dic['pixel_size'] = pixel_size
@@ -110,8 +113,10 @@ def generate_files(sample_param_dic, EM_param_dic, file_num):
     #---------------------------------------------------------------#
     downloads_folder = os.path.join(os.path.expanduser("~"), "Downloads")
     base_folder = os.path.join(downloads_folder, "STEM_MOS2")
+    print(f"Creating base folder: {base_folder}")
     if not os.path.exists(base_folder):
         os.makedirs(base_folder)
+        print(f"Base folder created: {base_folder}")
     
     # Find next batch folder number
     batch_num = 1
@@ -120,6 +125,8 @@ def generate_files(sample_param_dic, EM_param_dic, file_num):
     
     output_folder = os.path.join(base_folder, f"batch_{batch_num}")
     os.makedirs(output_folder)
+    print(f"Output folder created: {output_folder}")
+    print(f"Generating {file_num} files...")
     #---------------------------------------------------------------#
     
     
@@ -466,12 +473,12 @@ def generate_files(sample_param_dic, EM_param_dic, file_num):
         #Image and defect map have the same paramter file
         #except counting noise
         #---------------------------------------------------------------#
-        image_size_str      = '\n'+str(image_size)+' '+str(image_size)
+        image_size_str      = '\n'+str(int(image_size))+' '+str(int(image_size))
         Cs3                 = np.random.normal(Cs3_param[0],Cs3_param[1])
         Cs5                 = np.random.normal(Cs5_param[0],Cs5_param[1])
         STEM_Param_str      = '\n'+str(voltage)+' '+str(Cs3)+' '+str(Cs5)+' '+str(df)+' '+str(aperture)
         ADF_str             = '\n' + str(ADF_angle_min) + ' '+ str(ADF_angle_max)
-        High_order_str      = '\n'+Higher_order
+        High_order_str      = '\nEND'  # Must be exactly 'END' on its own line
         Source_size         = np.random.normal(Source_size_param[0],Source_size_param[1])
         source_size_str     = '\n'+str(Source_size)
         defocus_spread      = np.random.normal(defocus_spread_param[0],defocus_spread_param[1])
@@ -479,8 +486,16 @@ def generate_files(sample_param_dic, EM_param_dic, file_num):
         probe_current       = np.random.normal(probe_current_param[0],probe_current_param[1])
         noise_str           = '\n'+str(probe_current)+' '+str(dwell_time)
         
-        GeneralParam        = image_size_str+STEM_Param_str+ADF_str+High_order_str+source_size_str+Defocus_str+'\ny'+noise_str+'\n-1'
-        GeneralParam_defect = image_size_str+STEM_Param_str+ADF_str+High_order_str+source_size_str+Defocus_str+'\nn'+'\n-1'
+        # Correct format: after defocus_spread, answer y/n to noise question, then probe current/dwell time
+        GeneralParam        = image_size_str+STEM_Param_str+ADF_str+High_order_str+source_size_str+Defocus_str+'\ny'+noise_str
+        GeneralParam_defect = image_size_str+STEM_Param_str+ADF_str+High_order_str+source_size_str+Defocus_str+'\nn'
+        
+        # Debug: Print the first param file content for inspection
+        if N == 0:
+            print("\n=== PARAMETER FILE CONTENT (FIRST FILE) ===")
+            print(f"Filename: {filename}.xyz")
+            print(GeneralParam)
+            print("=== END PARAMETER FILE ===\n")
         #---------------------------------------------------------------#
         
         #Wirte Param str into files
@@ -507,3 +522,7 @@ def generate_files(sample_param_dic, EM_param_dic, file_num):
         
     #close batch files
     file_batch.close()
+    
+    # Return the output folder path and success message
+    print(f"Files successfully generated in: {output_folder}")
+    return output_folder
