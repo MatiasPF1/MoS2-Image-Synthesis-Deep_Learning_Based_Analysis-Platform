@@ -37,7 +37,17 @@ def generation_settings():
                         clearable=False,
                         className="batch-dropdown"
                     ),
-                    
+                    # Button for Loading Defaults and Generating
+                    html.Button(
+                        [
+                            html.I(className="fas fa-redo", style={"marginRight": "10px"}),
+                            "Load Default Values"
+                        ],
+                        id="load-defaults-btn",
+                        className="generate-btn",
+                        style={"marginBottom": "15px", "backgroundColor": "#6c757d"}
+                    ),
+                    # Button to Start Generation
                     html.Button(
                         [
                             html.I(className="fas fa-play", style={"marginRight": "10px"}),

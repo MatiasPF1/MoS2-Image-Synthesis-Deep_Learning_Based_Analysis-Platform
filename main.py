@@ -252,7 +252,6 @@ def toggle_buttons(material_clicks, microscope_clicks):
 ##########################################################################################################################
 #                               2-  Main Section Interactivity(3rd) -- Send inputs to the Generation Module
 ##########################################################################################################################
-
 def safe_float(value, default=0.0):
     """Convert value to float, return default if None or empty"""
     if value is None or value == '':
@@ -370,10 +369,117 @@ def store_parameters_RunGeneration(n_clicks, batch_size, mat_name, pixel_size, m
     Generation.run_generation(int(batch_size))
     return n_clicks
 
+##########################################################################################################################
+#                               3-  Load Default Values Into Input Fields
+##########################################################################################################################
+
+@app.callback(
+    [
+        # Material Properties Outputs
+        Output('mat-name', 'value'),
+        Output('pixel-size', 'value'),
+        Output('metal-atom', 'value'),
+        Output('lattice-const', 'value'),
+        Output('img-size', 'value'),
+        Output('chal-atom', 'value'),
+        
+        # Metal Site Defects Outputs
+        Output('sub-atom-metal', 'value'),
+        Output('metal-sub-conc', 'value'),
+        Output('metal-vac-conc', 'value'),
+        
+        # Chalcogen Site Defects Outputs
+        Output('sub-atom-chal', 'value'),
+        Output('chal-sub-conc', 'value'),
+        Output('vac-one-conc', 'value'),
+        Output('vac-two-conc', 'value'),
+        Output('sub-two-conc', 'value'),
+        Output('sub-one-conc', 'value'),
+        
+        # Microscope Settings Outputs
+        Output('voltage', 'value'),
+        Output('aperture', 'value'),
+        Output('defocus', 'value'),
+        Output('dwell-time', 'value'),
+        
+        # Aberration Coefficients Outputs
+        Output('cs3-mean', 'value'),
+        Output('cs3-std', 'value'),
+        Output('cs5-mean', 'value'),
+        Output('cs5-std', 'value'),
+        
+        # ADF Settings Outputs
+        Output('adf-angle-min', 'value'),
+        Output('adf-angle-max', 'value'),
+        
+        # Gaussian Parameters Outputs
+        Output('src-size-mean', 'value'),
+        Output('defoc-spread-mean', 'value'),
+        Output('probe-cur-mean', 'value'),
+        Output('src-size-std', 'value'),
+        Output('defoc-spread-std', 'value'),
+        Output('probe-cur-std', 'value'),
+    ],
+    Input('load-defaults-btn', 'n_clicks'),
+    prevent_initial_call=True
+)
+def load_default_values(n_clicks):
+    """Load default values into all input fields when button is clicked"""
+    if not n_clicks:
+        return dash.no_update
+    
+    return (
+        # Material Properties
+        'MoS2',      # mat-name
+        0.1,         # pixel-size
+        42,          # metal-atom (Mo)
+        3.16,        # lattice-const
+        512,         # img-size
+        16,          # chal-atom (S)
+        
+        # Metal Site Defects
+        42,          # sub-atom-metal (Mo)
+        0.0,         # metal-sub-conc
+        0.0,         # metal-vac-conc
+        
+        # Chalcogen Site Defects
+        16,          # sub-atom-chal (S)
+        0.0,         # chal-sub-conc
+        0.0,         # vac-one-conc
+        0.0,         # vac-two-conc
+        0.0,         # sub-two-conc
+        0.0,         # sub-one-conc
+        
+        # Microscope Settings
+        300,         # voltage
+        25,          # aperture
+        0.0,         # defocus
+        1.0,         # dwell-time
+        
+        # Aberration Coefficients
+        0.0,         # cs3-mean
+        0.0,         # cs3-std
+        0.0,         # cs5-mean
+        0.0,         # cs5-std
+        
+        # ADF Settings
+        70,          # adf-angle-min
+        200,         # adf-angle-max
+        
+        # Gaussian Parameters
+        0.5,         # src-size-mean
+        10,          # defoc-spread-mean
+        100,         # probe-cur-mean
+        0.1,         # src-size-std
+        1,           # defoc-spread-std
+        10,          # probe-cur-std
+    )
+
+
+
 
 # Register display values callback
 register_display_values_callback(app)
-
 # Register file upload callbacks for STEM Generation page
 register_file_upload_callbacks(app)
 
